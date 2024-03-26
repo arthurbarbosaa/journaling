@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path
-from journaling.views import home
+from journaling.views import journal_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
+    path('', journal_list),
 ]
