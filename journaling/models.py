@@ -1,16 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Journal(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    highlight_text = models.TextField()
-
+class Header(models.Model):
+    highlight_type = models.TextField()
     habit_name = models.CharField(max_length=255)
-    is_habit_practiced = models.BooleanField(default=False)
-
     tracking_name = models.CharField(max_length=255)
-    tracking_value = models.FloatField()
 
-    goal_name = models.CharField(max_length=255)
-    is_goal_done = models.BooleanField()
+class Journal(models.Model):
+    highlight_text = models.TextField()
+    is_habit_practiced = models.BooleanField()
+    tracking_value = models.FloatField()
+class Goal(models.Model):
+    name = models.CharField(max_length=255)
+    is_done = models.BooleanField()

@@ -1,0 +1,17 @@
+/* Remove as bordas da tabela */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Estiliza os campos de entrada */
+input[type="text"],
+input[type="number"] {
+    border: none; /* Remove a borda dos campos de entrada */
+    padding: 5px; /* Adiciona um pouco de espaço interno */
+    width: 100%; /* Faz com que os campos de entrada ocupem toda a largura disponível */
+}
+
+input[type="checkbox"] {
+    margin: 0; /* Remove a margem padrão do checkbox */
+}
