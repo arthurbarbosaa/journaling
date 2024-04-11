@@ -1,8 +1,7 @@
 from django.contrib import admin
-from django.urls import path
-from journaling.views import journal_list
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', journal_list),
+    path('', include('journaling.urls')),
 ]

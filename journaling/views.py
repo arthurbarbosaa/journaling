@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from datetime import datetime
 from calendar import monthrange
 from .models import Journal
@@ -31,3 +31,20 @@ def journal_list(request):
         "journals": journals,
         "dates": date_info,
     })
+
+def save_journal(request):
+    if request.method == 'POST':
+        highlight_text = request.POST.get('highlight_text')
+        is_habit_1_practiced = request.POST.get('is_habit_1_practiced') == 'on'
+        is_habit_2_practiced = request.POST.get('is_habit_2_practiced') == 'on'
+        tracking_value = request.POST.get('tracking_value')
+
+        journal = Journal(
+            highlight_text=highlight_text,
+            is_habit_1_practiced=is_habit_1_practiced,
+            is_habit_2_practiced=is_habit_2_practiced,
+            tracking_value=tracking_value
+        )
+        journal.save()
+
+        return redirect('journal_list')

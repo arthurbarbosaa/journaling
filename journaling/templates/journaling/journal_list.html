@@ -1,5 +1,3 @@
-{% load humanize %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,10 +43,14 @@
                     {% for day_name in dates.weekdays_names %}
                     <tr>
                         <th scope="row">{{ day_name }}</th>
-                        <td><input type="text" name="highlight_text" class="form-control border-0"></td>
-                        <td class="table-cell"><input type="checkbox" style="width: 25px; height: 25px;"></td>
-                        <td class="table-cell"><input type="checkbox" style="width: 25px; height: 25px;"></td>
-                        <td><input type="number" name="tracking_value" class="form-control small-width-input border-0 "></td>
+                        <form method="POST" action="{% url 'save_journal' %}">
+                            {% csrf_token %}
+                            <td><input type="text" name="highlight_text" class="form-control border-0" autocomplete="off"></td>
+                            <td class="table-cell"><input type="checkbox" name="is_habit_1_practiced" style="width: 25px; height: 25px;"></td>
+                            <td class="table-cell"><input type="checkbox" name="is_habit_2_practiced" style="width: 25px; height: 25px;"></td>
+                            <td><input type="number" name="tracking_value" class="form-control small-width-input border-0 "></td>
+                            <td><button type="submit" class="btn btn-primary">Salvar</button></td>
+                        </form>
                     </tr>
                     {% endfor %}
                     </tr>
