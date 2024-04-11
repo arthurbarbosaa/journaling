@@ -28,7 +28,7 @@
 </nav>
 
 <div class="container text-center">
-    <h1 class="fw-bold display-4 mb-5">{{ nome_mes_atual }}</h1>
+    <h1 class="fw-bold display-4 mb-5">{{ dates.current_month_name }}</h1>
     <div class="row">
         <div class="col-md-8">
             <table class="table">
@@ -37,14 +37,16 @@
                         <th scope="col">Day</th>
                         <th scope="col">Highlight</th>
                         <th scope="col">Gym</th>
+                        <th scope="col">Read</th>
                         <th scope="col">Weight</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for dia_semana in nome_dias_semana %}
+                    {% for day_name in dates.weekdays_names %}
                     <tr>
-                        <th scope="row">{{ dia_semana }}</th>
+                        <th scope="row">{{ day_name }}</th>
                         <td><input type="text" name="highlight_text" class="form-control border-0"></td>
+                        <td class="table-cell"><input type="checkbox" style="width: 25px; height: 25px;"></td>
                         <td class="table-cell"><input type="checkbox" style="width: 25px; height: 25px;"></td>
                         <td><input type="number" name="tracking_value" class="form-control small-width-input border-0 "></td>
                     </tr>

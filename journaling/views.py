@@ -1,35 +1,33 @@
 from django.shortcuts import render
 from datetime import datetime
 from calendar import monthrange
+from .models import Journal
 
-from .models import Journal,Header,Goal
-#refatorar para ingles
+def get_weekdays_names(year, month):
+    num_days_month = monthrange(year, month)[1]
+    return [datetime(year, month, day).strftime("%d %A") for day in range(1, num_days_month + 1)]
 
-ano_atual = datetime.now().year
-mes_atual = datetime.now().month
-
-nome_mes_atual = datetime.now().strftime("%B")
-nome_dias_semana = []
-
-num_dias_mes_atual = monthrange(ano_atual, mes_atual)[1]
-for dia in range(1, num_dias_mes_atual + 1):
-    data = datetime(ano_atual, mes_atual, dia)
-    dia_semana = data.strftime("%d %A")
-    nome_dias_semana.append(dia_semana)
-
-
+def get_current_date_info():
+    today = datetime.now()
+    return {
+        'current_year': today.year,
+        'current_month': today.month,
+        'current_month_name': today.strftime("%B"),
+        'weekdays_names': get_weekdays_names(today.year, today.month),
+    }
 
 def journal_list(request):
-    print("Debugging: Entrou na minha_view")
-    print(f"Debugging: variavel nome_mes_atual: {nome_mes_atual}")
-    headers = Header.objects.all
-    journals = Journal.objects.all
+    print("Debugging: Entered my_view")
 
+    date_info = get_current_date_info()
+    print(f"Debugging: variable current_month_name: {date_info['current_month_name']}")
+    print(f"Debugging: variable weekdays_names: {date_info['weekdays_names']}")
+
+    user = request.user
+    journals = Journal.objects.all()
 
     return render(request, "journaling/journal_list.html", {
-        "headers": headers,
+        "user": user,
         "journals": journals,
-        "nome_mes_atual": nome_mes_atual,
-        "nome_dias_semana": nome_dias_semana,
-        
-        })
+        "dates": date_info,
+    })
